@@ -181,3 +181,9 @@ def a_1_auto(driver, year, model, part, loc, sort, yard_zip, selected_id):
             print('Dealer Info:', dealer_info[:60])  # Limit dealer info to 60 characters
 
 a_1_auto(driver, year, model, part, loc, sort, yard_zip, selected_id)
+
+
+
+
+
+# tessfsdfsdfsdf
