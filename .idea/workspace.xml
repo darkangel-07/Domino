@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3594b53e-e762-44b1-b357-1a0ea6466963" name="Changes" comment="first commit" />
+    <list default="true" id="3594b53e-e762-44b1-b357-1a0ea6466963" name="Changes" comment="git connected">
+      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/Blanka-Regular.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/DMSans-Bold-BF64376d32191f2.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/Poppins-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/Poppins-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simplified-background-remover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Blanka-Regular.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/DMSans-Bold-BF64376d32191f2.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Poppins-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Poppins-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/simplified-background-remover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -37,16 +55,53 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.app.executor": "Run",
     "Python.main.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/rithi/OneDrive/Desktop/Python Project/Project Domino",
+    "last_opened_file_path": "C:/Users/rithi/OneDrive/Desktop/Python Project/Project Domino/static",
     "settings.editor.selected.configurable": "preferences.lookFeel"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
+    ]
   }
 }]]></component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\rithi\OneDrive\Desktop\Python Project\Project Domino\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rithi\OneDrive\Desktop\Python Project\Project Domino\template" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Project Domino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Project Domino" />
       <option name="ENV_FILES" value="" />
@@ -93,6 +148,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -113,6 +169,31 @@
       <option name="presentableId" value="Default" />
       <updated>1707360281256</updated>
     </task>
+    <task id="LOCAL-00001" summary="third commit">
+      <option name="closed" value="true" />
+      <created>1708711495749</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708711495749</updated>
+    </task>
+    <task id="LOCAL-00002" summary="comment edit test">
+      <option name="closed" value="true" />
+      <created>1708711993745</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708711993745</updated>
+    </task>
+    <task id="LOCAL-00003" summary="git connected">
+      <option name="closed" value="true" />
+      <created>1708712043215</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708712043215</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +210,9 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="third commit" />
+    <MESSAGE value="comment edit test" />
+    <MESSAGE value="git connected" />
+    <option name="LAST_COMMIT_MESSAGE" value="git connected" />
   </component>
 </project>

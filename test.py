@@ -1,42 +1,149 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
-import requests
 import time
+from fake_useragent import UserAgent
+import random
 
-def use_proxy(proxy):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--proxy-server=%s' % proxy)
+# Set up Chrome options
+options = Options()
+options.add_argument("--headless")  # Ensure GUI is off
 
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get("http://checkip.amazonaws.com")
+# Create a UserAgent object
+user_agent = UserAgent()
+headers = {'User-Agent': user_agent.random}
 
 
-    body_text = driver.find_element(By.TAG_NAME, "body").text
-    print(f"Proxy: {proxy}, IP: {body_text}")
+service = Service(executable_path="chromedriver.exe")
+driver = webdriver.Chrome(service=service, options=options)  # Pass the options parameter here
+driver.get("https://www.car-part.com/")
 
-    # If the proxy is working, visit https://www.car-part.com/
-    if body_text.strip() == proxy.split(':')[0]:
-        print(f"Proxy {proxy} is working. Now visiting https://www.car-part.com/")
-        driver.get("https://www.car-part.com/")
-        time.sleep(3)
-        # Add your code here to interact with the website
 
-    
+def select_radio_button(selected_id):
+    radio_buttons = driver.find_elements(By.XPATH, "//input[@type='radio']")
+    if selected_id.isdigit() and 1 <= int(selected_id) <= len(radio_buttons):
+        radio_buttons[int(selected_id) - 1].click()
+        radio_buttons[int(selected_id) - 1].send_keys(Keys.TAB)
+        radio_buttons[int(selected_id) - 1].send_keys(Keys.ENTER)
+    else:
+        print("Invalid ID selected.")
 
-# Scrape the proxies
-url = "https://www.us-proxy.org/"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
 
-proxy_array = []
-for row in soup.find('table').find_all('tr'):
-    columns = row.find_all('td')
-    if columns:
-        ip = columns[0].get_text()
-        port = columns[1].get_text()
-        proxy_array.append(f"{ip}:{port}")
+def fill_form(driver, year, model, part, loc, sort, yard_zip):
+    # Find Year
+    search_year = driver.find_element(By.ID, "year")
+    search_year.send_keys(year)
+    search_year.send_keys(Keys.TAB)
+    # Find Model
+    search_model = driver.find_element(By.ID, "model")
+    search_model.send_keys(model)
+    search_model.send_keys(Keys.TAB)
+    # Find Part
+    search_part = driver.find_element(By.NAME, "userPart")
+    search_part.send_keys(part)
+    search_part.send_keys(Keys.TAB)
+    # Location
+    search_loc = driver.find_element(By.ID, "Loc")
+    search_loc.send_keys(loc)
+    search_loc.send_keys(Keys.TAB)
+    # Sort
+    search_sort = driver.find_element(By.NAME, "userPreference")
+    search_sort.send_keys(sort)
+    search_sort.send_keys(Keys.TAB)
+    # Zip
+    search_zip = driver.find_element(By.NAME, "userZip")
+    search_zip.send_keys(yard_zip)
+    search_zip.send_keys(Keys.TAB)
+    search_zip.send_keys(Keys.TAB)
+    search_zip.send_keys(Keys.ENTER)
 
-# Use the proxies with Selenium
-for proxy in proxy_array:
-    use_proxy(proxy)
+
+year = "2005"
+model = "Honda Civic"
+part = "Engine"
+loc = "USA"
+sort = "price"
+yard_zip = ""
+
+driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": user_agent.random})
+
+fill_form(driver, year, model, part, loc, sort, yard_zip)
+
+# Parse the HTML
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+# Find all radio buttons and their labels
+radio_buttons = driver.find_elements(By.XPATH, "//input[@type='radio']")
+for i, button in enumerate(radio_buttons):
+    label = button.find_element(By.XPATH, "following-sibling::label")
+    print(f"{i + 1}. {label.text.strip()}")
+
+# Store the selected_id in a variable
+selected_id = input("Enter the ID of the radio button you want to select: ")
+
+select_radio_button(selected_id)
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+
+def all_foreign(driver, year, model, part, loc, sort, yard_zip, selected_id):
+    driver.get("https://www.car-part.com/")
+    # Fill the form with the provided details but with zip as 12345
+    fill_form(driver, year, model, part, loc, "zip", "15201")
+    # Wait for the page to load
+    time.sleep(3)
+    select_radio_button(selected_id)
+    # Uncomment this line
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    tables = soup.find_all('table')
+    # Select the second table and find all rows in it
+    rows = tables[4].find_all('tr')
+    for row in rows:
+        # Get all columns in the row
+        cols = row.find_all('td')
+        if cols and cols[-1].text.strip() == '0':
+            stock = cols[4].text.strip()
+            if not any(char.isalpha() for char in stock):  # Check if 'Stock#' contains any alphabets
+                # Print Year, Part, Model, Description, Miles, Part Grade, Stock#, US Price, Dealer Info
+                print('Year, Part, Model:', cols[0].text.strip())
+                print('Description:', cols[1].text.strip())
+                print('Miles:', cols[2].text.strip())
+                print('Part Grade:', cols[3].text.strip())
+                print('Stock#:', stock)
+                print('US Price:', cols[5].text.strip())
+                dealer_info = cols[6].text.strip()
+                print('Dealer Info:', dealer_info[:60])  # Limit dealer info to 60 characters
+
+all_foreign(driver, year, model, part, loc, sort, yard_zip, selected_id)
+
+def a_1_auto(driver, year, model, part, loc, sort, yard_zip, selected_id):
+    driver.get("https://www.car-part.com/")
+    fill_form(driver, year, model, part, loc, "zip", "89011")
+    # Wait for the page to load
+    time.sleep(3)
+    select_radio_button(selected_id)
+    # Uncomment this line
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    # # Find all tables
+    tables = soup.find_all('table')
+    # # Select the second table and find all rows in it
+    rows = tables[4].find_all('tr')
+    for row in rows:
+        # Get all columns in the row
+        cols = row.find_all('td')
+        if cols and cols[-1].text.strip() == '0':
+            # Print Year, Part, Model, Description, Miles, Part Grade, Stock#, US Price, Dealer Info
+            print('Year, Part, Model:', cols[0].text.strip())
+            print('Description:', cols[1].text.strip())
+            print('Miles:', cols[2].text.strip())
+            print('Part Grade:', cols[3].text.strip())
+            print('Stock#:', cols[4].text.strip())
+            print('US Price:', cols[5].text.strip())
+            dealer_info = cols[6].text.strip()
+            print('Dealer Info:', dealer_info[:60])  # Limit dealer info to 60 characters
+
+a_1_auto(driver, year, model, part, loc, sort, yard_zip, selected_id)
+
+

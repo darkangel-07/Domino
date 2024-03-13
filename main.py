@@ -5,12 +5,17 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import time
+from fake_useragent import UserAgent
+import random
 
 # Set up Chrome options
 options = Options()
-options.add_argument("--headless")  # Ensure GUI is off
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
+# options.add_argument("--headless")  # Ensure GUI is off
+
+# Create a UserAgent object
+user_agent = UserAgent()
+headers = {'User-Agent': user_agent.random}
+
 
 service = Service(executable_path="chromedriver.exe")
 driver = webdriver.Chrome(service=service, options=options)  # Pass the options parameter here
@@ -63,10 +68,13 @@ loc = "USA"
 sort = "price"
 yard_zip = ""
 
+driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": user_agent.random})
+
 fill_form(driver, year, model, part, loc, sort, yard_zip)
 
 # Wait for the page to load
   # Adjust the sleep time as needed
+
 
 # Parse the HTML
 soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -86,17 +94,20 @@ select_radio_button(selected_id)
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 
 
-driver = webdriver.Chrome(service=service)
+
 
 
 
 def all_foreign(driver, year, model, part, loc, sort, yard_zip, selected_id):
+    user_agent = UserAgent()
 
-    # Open a new tab
-    # driver.execute_script("window.open('');")
-    # Switch to the new tab (assuming it is the next one)
-    # driver.switch_to.window(driver.window_handles[-1])
-    # Navigate to the website
+    # Create a new WebDriver instance
+    options = Options()
+    options.add_argument(f"user-agent={user_agent.random}")  # Set a random user agent
+
+    # Create a new WebDriver instance
+    driver = webdriver.Chrome(service=service, options=options)
+
     driver.get("https://www.car-part.com/")
     # Fill the form with the provided details but with zip as 12345
     fill_form(driver, year, model, part, loc, "zip", "15201")
@@ -105,6 +116,7 @@ def all_foreign(driver, year, model, part, loc, sort, yard_zip, selected_id):
     # Adjust the sleep time as needed
     # Select the radio button
     select_radio_button(selected_id)
+    time.sleep(3)
     # Uncomment this line
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     # # Find all tables
@@ -138,12 +150,14 @@ def all_foreign(driver, year, model, part, loc, sort, yard_zip, selected_id):
 all_foreign(driver, year, model, part, loc, sort, yard_zip, selected_id)
 
 def a_1_auto(driver, year, model, part, loc, sort, yard_zip, selected_id):
+    user_agent = UserAgent()
 
-    # Open a new tab
-    # driver.execute_script("window.open('');")
-    # Switch to the new tab (assuming it is the next one)
-    # driver.switch_to.window(driver.window_handles[-1])
-    # Navigate to the website
+    # Create a new WebDriver instance
+    options = Options()
+    options.add_argument(f"user-agent={user_agent.random}")  # Set a random user agent
+
+    driver = webdriver.Chrome(service=service, options=options)
+
     driver.get("https://www.car-part.com/")
     # Fill the form with the provided details but with zip as 11111
     fill_form(driver, year, model, part, loc, "zip", "89011")
